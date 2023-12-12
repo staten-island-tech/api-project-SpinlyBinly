@@ -1,15 +1,15 @@
-const URL = "https://openlibrary.org/search.json";
+const URL = "https://openlibrary.org/search/authors.json?q=twain";
 
 async function getData(URL) {
   try {
     const response = await fetch(URL);
     const data = await response.json();
-    document.getElementById("api-response").textContent = data.content;
+    document.getElementById("api-response").textContent = data.docs;
     console.log(data);
     if (response.status != 200) throw new Error(response.statusText);
-    document.querySelector("h1").textContent = data.content;
+    document.querySelector("h1").textContent = data.docs;
     document.querySelector("h2").textContent =
-      "Not found, please search for something else."; //change .content to match w my api
+      "Not found, please search for something else.";
     console.log(data);
   } catch (error) {
     console.log(error);
