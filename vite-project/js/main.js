@@ -1,11 +1,20 @@
-const URL = "https://openlibrary.org/search/authors.json?q=twain";
+let URL = `https://openlibrary.org/search.json?q=+and+punishment&fields=key,title,author_name,editions`;
 
+const DOMSelectors = {
+  button: document.querySelector("#bts"),
+  input: document.querySelector("#inpt"),
+};
+console.log(DOMSelectors.button);
 async function getData(URL) {
   try {
     const response = await fetch(URL);
     const data = await response.json();
-    document.getElementById("api-response").textContent = data.docs;
-    console.log(data);
+    DOMSelectors.button.addEventListener("click", function (event) {
+      event.preventDefault();
+      const value = DOMSelectors.input.value;
+      URL = `https://openlibrary.org/search.json?q=${value}&fields=key,title,author_name,editions`;
+      console.log(URL);
+    });
     if (response.status != 200) throw new Error(response.statusText);
     document.querySelector("h1").textContent = data.docs;
     document.querySelector("h2").textContent =
@@ -29,3 +38,34 @@ console.log(books);
 books.then((result) => {
   console.log(result);
 });
+
+function clearFields() {
+  DOMSelectors.container.innerHTML = "";
+}
+
+/*
+function populate(arr) {
+  arr.forEach((el) =>
+    DOMSelectors.container.insertAdjacentHTML(
+      "beforeend",
+      `<div class=card><h1>${el.firstName} ${el.lastName}</h1>
+      <img class="imgs" src="${el.img}" alt="">
+      <h3 id="h3" class="">${el.description}</h3>
+      </div>`
+    )
+  );
+}
+
+populate(opps);
+function filters() {
+  DOMSelectors.buttons.forEach((btn) =>
+    btn.addEventListener("click", function () {
+      let category = btn.textContent.toLowerCase();
+      let newArr = opps.filter((el) => el.janeWin.includes(category));
+      clearFields();
+      populate(newArr);
+    })
+  );
+}
+filters();
+ */
