@@ -7,13 +7,14 @@ const DOMSelectors = {
 console.log(DOMSelectors.button);
 async function getData(URL) {
   try {
+    DOMSelectors.button.addEventListener("click", function (event) {
     const response = await fetch(URL);
     const data = await response.json();
-    DOMSelectors.button.addEventListener("click", function (event) {
       event.preventDefault();
       const value = DOMSelectors.input.value;
       URL = `https://openlibrary.org/search.json?q=${value}&fields=key,title,author_name,editions`;
       console.log(URL);
+      
     });
     if (response.status != 200) throw new Error(response.statusText);
     document.querySelector("h1").textContent = data.docs;
