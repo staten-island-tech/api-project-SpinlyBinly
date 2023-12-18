@@ -1,4 +1,4 @@
-let URL = `https://openlibrary.org/search.json?q=+and+punishment&fields=key,title,author_name,editions`;
+let URL = `https://openlibrary.org/search.json`;
 
 const DOMSelectors = {
   button: document.querySelector("#bts"),
@@ -7,14 +7,14 @@ const DOMSelectors = {
 console.log(DOMSelectors.button);
 async function getData(URL) {
   try {
-    DOMSelectors.button.addEventListener("click", function (event) {
-    const response = await fetch(URL);
-    const data = await response.json();
+    DOMSelectors.button.addEventListener("click", async function (event) {
+      const response = await fetch(URL);
+      const data = await response.json();
       event.preventDefault();
       const value = DOMSelectors.input.value;
       URL = `https://openlibrary.org/search.json?q=${value}&fields=key,title,author_name,editions`;
       console.log(URL);
-      
+      console.log(data);
     });
     if (response.status != 200) throw new Error(response.statusText);
     document.querySelector("h1").textContent = data.docs;
@@ -49,7 +49,7 @@ function populate(arr) {
   arr.forEach((el) =>
     DOMSelectors.container.insertAdjacentHTML(
       "beforeend",
-      `<div class=card><h1>${el.firstName} ${el.lastName}</h1>
+      `<div class=card><h1>${author_name}</h1>
       <img class="imgs" src="${el.img}" alt="">
       <h3 id="h3" class="">${el.description}</h3>
       </div>`
@@ -57,12 +57,12 @@ function populate(arr) {
   );
 }
 
-populate(opps);
+populate(URL);
 function filters() {
-  DOMSelectors.buttons.forEach((btn) =>
-    btn.addEventListener("click", function () {
-      let category = btn.textContent.toLowerCase();
-      let newArr = opps.filter((el) => el.janeWin.includes(category));
+  DOMSelectors.button.forEach((bts) =>
+    bts.addEventListener("click", function () {
+      let category = bts.textContent.toLowerCase();
+      let newArr = opps.filter((el) => el._____.includes(category));
       clearFields();
       populate(newArr);
     })
