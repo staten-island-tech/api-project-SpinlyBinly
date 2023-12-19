@@ -13,8 +13,8 @@ async function getData(URL) {
       event.preventDefault();
       const value = DOMSelectors.input.value;
       URL = `https://openlibrary.org/search.json?q=${value}&fields=key,title,author_name,editions`;
-      console.log(URL);
-      console.log(data);
+      let x = document.URL.textContent;
+      console.log(URL.replaceAll(" ", "+"));
     });
     if (response.status != 200) throw new Error(response.statusText);
     document.querySelector("h1").textContent = data.docs;
@@ -27,9 +27,12 @@ async function getData(URL) {
 }
 getData(URL);
 
-function greet(name) {
+//variable = text.content
+//replace all spaces w +
+
+function greet(title) {
   const greetPromise = new Promise(function (resolve, rejected) {
-    resolve(`Title: ${name}`);
+    resolve(`Title: ${title}`);
   });
   return greetPromise;
 }
@@ -43,30 +46,3 @@ books.then((result) => {
 function clearFields() {
   DOMSelectors.container.innerHTML = "";
 }
-
-/*
-function populate(arr) {
-  arr.forEach((el) =>
-    DOMSelectors.container.insertAdjacentHTML(
-      "beforeend",
-      `<div class=card><h1>${author_name}</h1>
-      <img class="imgs" src="${el.img}" alt="">
-      <h3 id="h3" class="">${el.description}</h3>
-      </div>`
-    )
-  );
-}
-
-populate(URL);
-function filters() {
-  DOMSelectors.button.forEach((bts) =>
-    bts.addEventListener("click", function () {
-      let category = bts.textContent.toLowerCase();
-      let newArr = opps.filter((el) => el._____.includes(category));
-      clearFields();
-      populate(newArr);
-    })
-  );
-}
-filters();
- */
