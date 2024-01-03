@@ -1,5 +1,3 @@
-const endpoint = `https://openlibrary.org/search.json`;
-
 const DOMSelectors = {
   button: document.querySelector("#btn"),
   input: document.querySelector("#input"),
@@ -8,38 +6,43 @@ const DOMSelectors = {
 
 function clearFields() {
   DOMSelectors.container.innerHTML = "";
-}
-
-async function getData(apiEndpoint) {
-  try {
+}   
+async function getData() {
+/*   try { */
     DOMSelectors.button.addEventListener("click", async function (event) {
       event.preventDefault();
-      const response = await fetch(apiEndpoint);
+      const values = DOMSelectors.input.value;
+      const response = await fetch(`https://openlibrary.org/search.json?q=${values}&fields=key,title,author_name,editions`);
+      /* if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      } */
       const data = await response.json();
-      const value = DOMSelectors.input.value;
-      const URL = `https://openlibrary.org/search.json?q=${value}&fields=key,title,author_name,editions`;
-      console.log(URL.replaceAll(" ", "+"));
-      clearFields();
-      let books = data
-      books.forEach((book) => {
+      clearFields()
+/*       if (data.docs.length === 0) { */
+        DOMSelectors.container.insertAdjacentHTML(
+          "beforeend",
+          `<div class="card">
+            <h2>No results found. Please try another search.</h2>
+          </div>`
+        );
+      } /* else {
+        data.docs.forEach((value) => {
+          
+          const authors = value.author_name ? value.author_name.join(', ') : 'Unknown Author';
+ */
           DOMSelectors.container.insertAdjacentHTML(
             "beforeend",
-            `<div class=card><h1>${book.title}</h1>
-        <img class="imgs"src="${book.img}" alt=""> 
-        <h3 id="h3" class="">${book.author}</h3>
-        </div>`
+            `<div class="card">
+              <h1>${value.title}</h1>
+              <h3 id="h3" class="">${authors}</h3>
+            </div>`
           );
-        });
-      });
+        }/* );
+      }
     });
-
-    if (response.status != 200) throw new Error(response.statusText);
-    document.querySelector("h1").textContent = data.docs;
-    document.querySelector("h2").textContent =
-      "Not found, please search for something else.";
-    console.log(data);
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }
-getData(endpoint);
+ */
+getData();
