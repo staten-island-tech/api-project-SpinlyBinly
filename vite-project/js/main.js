@@ -7,6 +7,7 @@ const DOMSelectors = {
 function clearFields() {
   DOMSelectors.container.innerHTML = "";
 }
+
 async function getData() {
   try {
     DOMSelectors.button.addEventListener("click", async function (event) {
@@ -15,17 +16,13 @@ async function getData() {
       const response = await fetch(
         `https://openlibrary.org/search.json?q=${values}&fields=key,title,author_name,editions`
       );
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
       const data = await response.json();
       clearFields();
+      
       if (data.docs.length === 0) {
         DOMSelectors.container.insertAdjacentHTML(
           "beforeend",
-          `<div class="card">
-            <h2>No results found. Please try another search.</h2>
-          </div>`
+          `<h2>No results found. Please try another search.</h2>`
         );
       } else {
         data.docs.forEach((value) => {
@@ -38,7 +35,7 @@ async function getData() {
             "beforeend",
             `<div class="card">
               <h1>${value.title}</h1>
-              <img src="https://covers.openlibrary.org/a/olid/OL23919A-M.jpg" alt="Book Covers">
+              <img src="https://covers.openlibrary.org/b/olid/OL82548W-S.jpg" alt="Book Covers">
               <h3 id="h3" class="">${authors}</h3>
             </div>`
           );
