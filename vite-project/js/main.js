@@ -18,7 +18,7 @@ async function getData() {
       );
       const data = await response.json();
       clearFields();
-      
+
       if (data.docs.length === 0) {
         DOMSelectors.container.insertAdjacentHTML(
           "beforeend",
@@ -28,14 +28,14 @@ async function getData() {
         data.docs.forEach((value) => {
           const authors = value.author_name;
           let images = value.key;
-          images = images.replace("/works/", "");
-
-          console.log(images);
+          /*           let imag = images.replace("/works/", ""); */
+          /*   imag = imag.replace("W", ""); */
+          console.log(`https://covers.openlibrary.org/b/olid/${images}-S.jpg`);
           DOMSelectors.container.insertAdjacentHTML(
             "beforeend",
             `<div class="card">
               <h1>${value.title}</h1>
-              <img src="https://covers.openlibrary.org/b/olid/OL82548W-S.jpg" alt="Book Covers">
+              <img src="https://covers.openlibrary.org/b/olid/${images}-S.jpg" alt="Book Covers" class=image>
               <h3 id="h3" class="">${authors}</h3>
             </div>`
           );

@@ -50,7 +50,10 @@ h1 {
   border-radius: 8%;
   display: flex;
 }
-
+.image{
+  height: 500px;
+  width: auto;
+}
 button {
   border-radius: 8px;
   border: 1px solid transparent;
