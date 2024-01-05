@@ -22,6 +22,10 @@ body {
   justify-content: center;
 }
 
+.title {    
+  text-align: center;
+}
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
@@ -30,9 +34,10 @@ h1 {
 .container{
   display: flex;
   flex-wrap: wrap;
-  flex-direction:row;
+  flex-direction:column;
   justify-content:space-between;
   align-items: center;
+  text-align: center;
 }
 .card {
   padding: 2em;
@@ -49,6 +54,7 @@ h1 {
   align-items: center;
   border-radius: 8%;
   display: flex;
+  text-align: center;
 }
 .image{
   height: 500px;

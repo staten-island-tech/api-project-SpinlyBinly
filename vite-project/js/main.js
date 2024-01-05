@@ -27,15 +27,17 @@ async function getData() {
       } else {
         data.docs.forEach((value) => {
           const authors = value.author_name;
-          let images = value.key;
+          console.log(value.editions.docs[0].key);
+          let images = value.editions.docs[0].key.split("/");
           /*           let imag = images.replace("/works/", ""); */
           /*   imag = imag.replace("W", ""); */
-          console.log(`https://covers.openlibrary.org/b/olid/${images}-S.jpg`);
+          //console.log(`https://covers.openlibrary.org/b/olid/${images}-S.jpg`);
+
           DOMSelectors.container.insertAdjacentHTML(
             "beforeend",
             `<div class="card">
               <h1>${value.title}</h1>
-              <img src="https://covers.openlibrary.org/b/olid/${images}-S.jpg" alt="Book Covers" class=image>
+              <img src="https://covers.openlibrary.org/b/olid/${images[2]}-M.jpg" alt="Book Covers" class=image>
               <h3 id="h3" class="">${authors}</h3>
             </div>`
           );
@@ -48,3 +50,5 @@ async function getData() {
 }
 
 getData();
+
+//"/books/OL27296256M"
