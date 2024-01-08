@@ -13,17 +13,23 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-body {
-  margin: 0;
+/* body {
   display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
   justify-content: center;
 }
-
+ */
 .title {    
   text-align: center;
+}
+
+.search{
+    display: flex;    
+   flex-direction: row;
+    justify-content: center;  
+    font-size: medium;
 }
 
 h1 {
@@ -31,39 +37,37 @@ h1 {
   line-height: 1.1;
 }
 
-.container{
+#container{
   display: flex;
   flex-wrap: wrap;
-  flex-direction:column;
-  justify-content:space-between;
-  align-items: center;
-  text-align: center;
+  flex-direction:row;
+  justify-content:center;
 }
 .card {
-  padding: 2em;
   background-color: #4e4e4e;
-  margin: 2%;
   position: relative;
-  height: 350px;
   height: 400px;
-  width: 15%;
+  width: 20%;
+  margin: 30px;
   box-shadow: 10px 5px 5px rgb(44, 44, 44);
   transition: all 0.3s;
   transition-duration: 5ms;
-  flex-direction: column;
+  overflow: hidden;
   align-items: center;
   border-radius: 8%;
-  display: flex;
   text-align: center;
 }
+
+.card:hover {
+  transform: translate3d(4px, 5%, 1em);}
+
 .image{
-  height: 500px;
+  height: 30%;
   width: auto;
 }
 button {
   border-radius: 8px;
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
